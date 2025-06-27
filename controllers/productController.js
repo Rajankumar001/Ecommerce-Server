@@ -1,6 +1,6 @@
 import productModel from "../models/productModel.js";
 import categoryModel from "../models/categoryModel.js";
-// import orderModel from "../models/orderModel.js";
+import orderModel from "../models/orderModel.js";
 import fs from "fs";
 import slugify from "slugify";
 import braintree from "braintree";
@@ -327,6 +327,10 @@ export const productCategoryController = async (req, res) => {
 //token
 export const braintreeTokenController = async (req, res) => {
   try {
+    console.log("Merchant ID:", process.env.BRAINTREE_MERCHANT_ID);
+    console.log("Public Key:", process.env.BRAINTREE_PUBLIC_KEY);
+    console.log("Private Key:", process.env.BRAINTREE_PRIVATE_KEY);
+
     gateway.clientToken.generate({}, function (err, response) {
       if (err) {
         res.status(500).send(err);
